@@ -1396,10 +1396,12 @@ template(`userdom_unpriv_user_template', `
 
 	tunable_policy(`selinuxuser_tcp_server',`
 		corenet_tcp_bind_all_unreserved_ports($1_usertype)
+		corenet_tcp_bind_all_ephemeral_ports($1_usertype)
 	')
 
 	tunable_policy(`selinuxuser_udp_server',`
 		corenet_udp_bind_all_unreserved_ports($1_usertype)
+		corenet_udp_bind_all_ephemeral_ports($1_usertype)
 	')
 	optional_policy(`
 		cdrecord_role($1_r, $1_t)
@@ -1627,10 +1629,13 @@ template(`userdom_admin_user_template',`
 
 	tunable_policy(`selinuxuser_tcp_server',`
         corenet_tcp_bind_all_unreserved_ports($1_t)
+                corenet_tcp_bind_all_ephemeral_ports($1_t)
+
     ')
   
-	tunable_policy(`selinuxuser_tcp_server',`
+	tunable_policy(`selinuxuser_udp_server',`
         corenet_udp_bind_all_unreserved_ports($1_t)
+        corenet_udp_bind_all_ephemeral_ports($1_t)
     ')
       
 	optional_policy(`
